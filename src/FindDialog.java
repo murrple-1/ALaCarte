@@ -16,13 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class FindDialog extends JDialog {
+class FindDialog extends JDialog {
 	
 	private static final long serialVersionUID = 7449122359330132804L;
 	
 	private int returnValue = JOptionPane.CANCEL_OPTION;
 	
-	private RecipeBrowser recipeBrowser;
+	private final RecipeBrowser recipeBrowser;
 	
 	private Collection<Recipe> searchResults;
 	
@@ -38,7 +38,7 @@ public class FindDialog extends JDialog {
 	private JCheckBox ratingCheck;
 	private JCheckBox sourceCheck;
 	
-	public FindDialog(RecipeBrowser owner) {
+	FindDialog(RecipeBrowser owner) {
 		super(owner, "Find", true);
 		
 		recipeBrowser = owner;
@@ -49,15 +49,15 @@ public class FindDialog extends JDialog {
 		setUpWindow();
 	}
 	
-	public void searchRecipes() {
+	private void searchRecipes() {
 		String searchString = searchField.getText();
 		if(searchString != null && !searchString.isEmpty()) {
 			Pattern pattern = Pattern.compile(searchString);
-			searchResults = new ArrayList<Recipe>();
+			searchResults = new ArrayList<>();
 			for(Recipe recipe : recipeBrowser.getRecipeBook().getRecipes()) {
 				boolean addTo = false;
 				if(nameCheck.isSelected()) {
-					addTo |= pattern.matcher(recipe.getName()).matches();
+					addTo = pattern.matcher(recipe.getName()).matches();
 				}
 				if(descriptionCheck.isSelected()) {
 					addTo |= pattern.matcher(recipe.getDescription()).matches();
@@ -96,8 +96,8 @@ public class FindDialog extends JDialog {
 	private void setUpWindow() {
 		GridBagLayout layout = new GridBagLayout();
 
-		GridBagConstraints constra = new GridBagConstraints();
-		constra.insets = new Insets(3, 3, 3, 3);
+		GridBagConstraints gridBagConstraints = new GridBagConstraints();
+		gridBagConstraints.insets = new Insets(3, 3, 3, 3);
 		
 		JPanel panel = new JPanel();
 		add(panel);
@@ -105,176 +105,176 @@ public class FindDialog extends JDialog {
 		
 		JLabel searchLabel = new JLabel("Search:");
 		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		constra.gridx = 0;
-		constra.gridy = 0;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(searchLabel, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(searchLabel, gridBagConstraints);
 		panel.add(searchLabel);
 		
 		searchField = new JTextField();
-		constra.gridx = 1;
-		constra.gridy = 0;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(searchField, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(searchField, gridBagConstraints);
 		panel.add(searchField);
 		
 		JLabel searchWhereLabel = new JLabel("Search Fields:");
 		searchWhereLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		constra.gridx = 0;
-		constra.gridy = 1;
-		constra.weightx = 2.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 2;
-		constra.gridheight = 1;
-		layout.setConstraints(searchWhereLabel, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.weightx = 2.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(searchWhereLabel, gridBagConstraints);
 		panel.add(searchWhereLabel);
 		
 		nameCheck = new JCheckBox("Name");
-		constra.gridx = 0;
-		constra.gridy = 2;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(nameCheck, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(nameCheck, gridBagConstraints);
 		panel.add(nameCheck);
 		
 		descriptionCheck = new JCheckBox("Description");
-		constra.gridx = 1;
-		constra.gridy = 2;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(descriptionCheck, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(descriptionCheck, gridBagConstraints);
 		panel.add(descriptionCheck);
 		
 		ingredientsCheck = new JCheckBox("Ingredient");
-		constra.gridx = 0;
-		constra.gridy = 3;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(ingredientsCheck, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(ingredientsCheck, gridBagConstraints);
 		panel.add(ingredientsCheck);
 		
 		directionsCheck = new JCheckBox("Directions");
-		constra.gridx = 1;
-		constra.gridy = 3;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(directionsCheck, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(directionsCheck, gridBagConstraints);
 		panel.add(directionsCheck);
 		
 		contributorCheck = new JCheckBox("Contributor");
-		constra.gridx = 0;
-		constra.gridy = 4;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(contributorCheck, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(contributorCheck, gridBagConstraints);
 		panel.add(contributorCheck);
 		
 		categoryCheck = new JCheckBox("Category");
-		constra.gridx = 1;
-		constra.gridy = 4;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(categoryCheck, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(categoryCheck, gridBagConstraints);
 		panel.add(categoryCheck);
 		
 		spicesCheck = new JCheckBox("Spices");
-		constra.gridx = 0;
-		constra.gridy = 5;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(spicesCheck, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(spicesCheck, gridBagConstraints);
 		panel.add(spicesCheck);
 		
 		ratingCheck = new JCheckBox("Rating");
-		constra.gridx = 1;
-		constra.gridy = 5;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(ratingCheck, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(ratingCheck, gridBagConstraints);
 		panel.add(ratingCheck);
 		
 		sourceCheck = new JCheckBox("Source");
-		constra.gridx = 0;
-		constra.gridy = 6;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(sourceCheck, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 6;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(sourceCheck, gridBagConstraints);
 		panel.add(sourceCheck);
 		
 		JButton okButton = new JButton("OK");
 		ActionListener okL = new OKListener(this);
 		okButton.addActionListener(okL);
-		constra.gridx = 0;
-		constra.gridy = 7;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.NONE;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(okButton, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.NONE;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(okButton, gridBagConstraints);
 		panel.add(okButton);
 		
 		JButton cancelButton = new JButton("Cancel");
 		ActionListener cancelL = new CancelListener(this);
 		cancelButton.addActionListener(cancelL);
-		constra.gridx = 1;
-		constra.gridy = 7;
-		constra.weightx = 1.0;
-		constra.weighty = 1.0;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.NONE;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(cancelButton, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.NONE;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(cancelButton, gridBagConstraints);
 		panel.add(cancelButton);
 	}
 	
@@ -288,7 +288,7 @@ public class FindDialog extends JDialog {
 	
 	private static class OKListener implements ActionListener {
 
-		private FindDialog parent;
+		private final FindDialog parent;
 		
 		public OKListener(FindDialog parent) {
 			this.parent = parent;
@@ -305,7 +305,7 @@ public class FindDialog extends JDialog {
 	
 	private static class CancelListener implements ActionListener {
 
-		private FindDialog parent;
+		private final FindDialog parent;
 		
 		public CancelListener(FindDialog parent) {
 			this.parent = parent;

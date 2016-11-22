@@ -9,11 +9,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public class RecipeBook {
+class RecipeBook {
 
-	public static final String recipesTag = "recipes";
+	private static final String recipesTag = "recipes";
 	
-	private List<Recipe> recipes = new ArrayList<Recipe>();
+	private final List<Recipe> recipes = new ArrayList<>();
 
 	public RecipeBook(Document doc) {
 		Element recipesEle = (Element) doc.getElementsByTagName(recipesTag).item(0);

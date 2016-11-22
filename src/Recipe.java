@@ -3,16 +3,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class Recipe {
-	public static final String recipeTag = "recipe";
-	public static final String recipeNameTag = "name";
-	public static final String contributorTag = "contributor";
-	public static final String sourceTag = "source";
-	public static final String categoryTag = "category";
-	public static final String descriptionTag = "description";
-	public static final String spicesTag = "spices";
-	public static final String ratingTag = "rating";
-	public static final String ingredientsTag = "ingredients";
-	public static final String directionsTag = "directions";
+	static final String recipeTag = "recipe";
+
+	private static final String recipeNameTag = "name";
+	private static final String contributorTag = "contributor";
+	private static final String sourceTag = "source";
+	private static final String categoryTag = "category";
+	private static final String descriptionTag = "description";
+	private static final String spicesTag = "spices";
+	private static final String ratingTag = "rating";
+	private static final String ingredientsTag = "ingredients";
+	private static final String directionsTag = "directions";
 
 	private String name;
 	private String description;

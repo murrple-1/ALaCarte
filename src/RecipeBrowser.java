@@ -6,24 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
@@ -59,7 +42,7 @@ public class RecipeBrowser extends JFrame {
 	public RecipeBrowser() {
 		super("Recipe Browser");
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(600, 600);
 
 		setUpWindow();
@@ -70,7 +53,7 @@ public class RecipeBrowser extends JFrame {
         frame.setVisible(true);
     }
 	
-	public void openFile(File file) {
+	private void openFile(File file) {
 		if(file != null) {
 			try {
 				Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
@@ -85,7 +68,7 @@ public class RecipeBrowser extends JFrame {
 		}
 	}
 	
-	public void saveFile(File file) {
+	private void saveFile(File file) {
 		if(file != null && recipeBook != null) {
 			try {
 				Document doc = recipeBook.toXML();
@@ -100,7 +83,7 @@ public class RecipeBrowser extends JFrame {
 		}
 	}
 	
-	public void loadRecipeBook() {
+	private void loadRecipeBook() {
 		recipeListModel.clear();
 		if(recipeBook != null) {
 			for(Recipe recipe : recipeBook.getRecipes()) {
@@ -116,8 +99,8 @@ public class RecipeBrowser extends JFrame {
 	private void setUpWindow() {
 		GridBagLayout layout = new GridBagLayout();
 
-		GridBagConstraints constra = new GridBagConstraints();
-		constra.insets = new Insets(3, 3, 3, 3);
+		GridBagConstraints gridBagConstraints = new GridBagConstraints();
+		gridBagConstraints.insets = new Insets(3, 3, 3, 3);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -154,205 +137,205 @@ public class RecipeBrowser extends JFrame {
 		add(panel);
 		panel.setLayout(layout);
 
-		JLabel reciListLabel = new JLabel("Recipe List:");
-		reciListLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		constra.gridx = 0;
-		constra.gridy = 0;
-		constra.weightx = 1.0;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 3;
-		constra.gridheight = 1;
-		layout.setConstraints(reciListLabel, constra);
-		panel.add(reciListLabel);
+		JLabel recipeListLabel = new JLabel("Recipe List:");
+		recipeListLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 3;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(recipeListLabel, gridBagConstraints);
+		panel.add(recipeListLabel);
 
-		recipeList = new JList<Recipe>();
+		recipeList = new JList<>();
 		recipeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		recipeListModel = new DefaultListModel<Recipe>();
+		recipeListModel = new DefaultListModel<>();
 		recipeList.setModel(recipeListModel);
 		ListSelectionListener recipeListL = new RecipeSelectionListener(this);
 		recipeList.addListSelectionListener(recipeListL);
 		JScrollPane scrollPane = new JScrollPane(recipeList,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		constra.gridx = 0;
-		constra.gridy = 1;
-		constra.weightx = 1.0;
-		constra.weighty = 0.1;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.BOTH;
-		constra.gridwidth = 3;
-		constra.gridheight = 1;
-		layout.setConstraints(scrollPane, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 0.1;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.BOTH;
+		gridBagConstraints.gridwidth = 3;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(scrollPane, gridBagConstraints);
 		panel.add(scrollPane);
 
 		JLabel spiceFieldLabel = new JLabel("Spices:");
 		spiceFieldLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		constra.gridx = 0;
-		constra.gridy = 2;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(spiceFieldLabel, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(spiceFieldLabel, gridBagConstraints);
 		panel.add(spiceFieldLabel);
 
 		spicesField = new JTextField("");
-		constra.gridx = 1;
-		constra.gridy = 2;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(spicesField, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(spicesField, gridBagConstraints);
 		panel.add(spicesField);
 
 		JLabel ratingFieldLabel = new JLabel("Rating:");
 		ratingFieldLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		constra.gridx = 0;
-		constra.gridy = 3;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(ratingFieldLabel, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(ratingFieldLabel, gridBagConstraints);
 		panel.add(ratingFieldLabel);
 
 		ratingField = new JTextField();
-		constra.gridx = 1;
-		constra.gridy = 3;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(ratingField, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(ratingField, gridBagConstraints);
 		panel.add(ratingField);
 		
 		JLabel contributorFieldLabel = new JLabel("Contributor:");
 		contributorFieldLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		constra.gridx = 0;
-		constra.gridy = 4;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(contributorFieldLabel, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(contributorFieldLabel, gridBagConstraints);
 		panel.add(contributorFieldLabel);
 		
 		contributorField = new JTextField();
-		constra.gridx = 1;
-		constra.gridy = 4;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(contributorField, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(contributorField, gridBagConstraints);
 		panel.add(contributorField);
 		
 		JLabel categoryLabel = new JLabel("Category:");
 		categoryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		constra.gridx = 0;
-		constra.gridy = 5;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(categoryLabel, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(categoryLabel, gridBagConstraints);
 		panel.add(categoryLabel);
 		
 		categoryField = new JTextField();
-		constra.gridx = 1;
-		constra.gridy = 5;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(categoryField, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(categoryField, gridBagConstraints);
 		panel.add(categoryField);
 		
 		JLabel sourceLabel = new JLabel("Source:");
 		sourceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		constra.gridx = 0;
-		constra.gridy = 6;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.WEST;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(sourceLabel, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 6;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(sourceLabel, gridBagConstraints);
 		panel.add(sourceLabel);
 		
 		sourceField = new JTextField();
-		constra.gridx = 1;
-		constra.gridy = 6;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(sourceField, constra);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 6;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(sourceField, gridBagConstraints);
 		panel.add(sourceField);
 
 		descriptionRadio = new JRadioButton("Description");
 		descriptionRadio.setSelected(true);
-		ChangeListener descripL = new DescriptionChangeListener(this);
-		descriptionRadio.addChangeListener(descripL);
-		constra.gridx = 0;
-		constra.gridy = 7;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(descriptionRadio, constra);
+		ChangeListener descriptionChangeListener = new DescriptionChangeListener(this);
+		descriptionRadio.addChangeListener(descriptionChangeListener);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(descriptionRadio, gridBagConstraints);
 		panel.add(descriptionRadio);
 		
 		ingredientsRadio = new JRadioButton("Ingredients");
-		ChangeListener ingredL = new IngredientsChangeListener(this);
-		ingredientsRadio.addChangeListener(ingredL);
-		constra.gridx = 1;
-		constra.gridy = 7;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(ingredientsRadio, constra);
+		ChangeListener ingredientChangeListener = new IngredientsChangeListener(this);
+		ingredientsRadio.addChangeListener(ingredientChangeListener);
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(ingredientsRadio, gridBagConstraints);
 		panel.add(ingredientsRadio);
 		
 		directionsRadio = new JRadioButton("Directions");
-		ChangeListener direcL = new DirectionsChangeListener(this);
-		directionsRadio.addChangeListener(direcL);
-		constra.gridx = 2;
-		constra.gridy = 7;
-		constra.weightx = 0.33;
-		constra.weighty = 0.05;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.HORIZONTAL;
-		constra.gridwidth = 1;
-		constra.gridheight = 1;
-		layout.setConstraints(directionsRadio, constra);
+		ChangeListener directionsChangeListener = new DirectionsChangeListener(this);
+		directionsRadio.addChangeListener(directionsChangeListener);
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.weightx = 0.33;
+		gridBagConstraints.weighty = 0.05;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridwidth = 1;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(directionsRadio, gridBagConstraints);
 		panel.add(directionsRadio);
 		
 		ButtonGroup bGroup = new ButtonGroup();
@@ -366,21 +349,21 @@ public class RecipeBrowser extends JFrame {
 		scrollPane = new JScrollPane(informationArea,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		constra.gridx = 0;
-		constra.gridy = 8;
-		constra.weightx = 1.0;
-		constra.weighty = 0.5;
-		constra.anchor = GridBagConstraints.CENTER;
-		constra.fill = GridBagConstraints.BOTH;
-		constra.gridwidth = 3;
-		constra.gridheight = 1;
-		layout.setConstraints(scrollPane, constra);
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 8;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 0.5;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
+		gridBagConstraints.fill = GridBagConstraints.BOTH;
+		gridBagConstraints.gridwidth = 3;
+		gridBagConstraints.gridheight = 1;
+		layout.setConstraints(scrollPane, gridBagConstraints);
 		panel.add(scrollPane);
 	}
 	
 	private static class RecipeSelectionListener implements ListSelectionListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public RecipeSelectionListener(RecipeBrowser parent) {
 			this.parent = parent;
@@ -427,7 +410,7 @@ public class RecipeBrowser extends JFrame {
 	
 	private static class OpenXMLListener implements ActionListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public OpenXMLListener(RecipeBrowser parent) {
 			this.parent = parent;
@@ -449,7 +432,7 @@ public class RecipeBrowser extends JFrame {
 	
 	private static class NewRecipeListener implements ActionListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public NewRecipeListener(RecipeBrowser parent) {
 			this.parent = parent;
@@ -475,7 +458,7 @@ public class RecipeBrowser extends JFrame {
 	
 	private static class SaveXMLAsListener implements ActionListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public SaveXMLAsListener(RecipeBrowser parent) {
 			this.parent = parent;
@@ -499,7 +482,7 @@ public class RecipeBrowser extends JFrame {
 	
 	private static class SaveXMLListener implements ActionListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public SaveXMLListener(RecipeBrowser parent) {
 			this.parent = parent;
@@ -527,7 +510,7 @@ public class RecipeBrowser extends JFrame {
 	
 	private static class FindListener implements ActionListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public FindListener(RecipeBrowser parent) {
 			this.parent = parent;
@@ -554,7 +537,7 @@ public class RecipeBrowser extends JFrame {
 	
 	private static class DescriptionChangeListener implements ChangeListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public DescriptionChangeListener(RecipeBrowser parent) {
 			this.parent = parent;
@@ -575,7 +558,7 @@ public class RecipeBrowser extends JFrame {
 	
 	private static class IngredientsChangeListener implements ChangeListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public IngredientsChangeListener(RecipeBrowser parent) {
 			this.parent = parent;
@@ -596,7 +579,7 @@ public class RecipeBrowser extends JFrame {
 	
 	private static class DirectionsChangeListener implements ChangeListener {
 
-		private RecipeBrowser parent;
+		private final RecipeBrowser parent;
 		
 		public DirectionsChangeListener(RecipeBrowser parent) {
 			this.parent = parent;

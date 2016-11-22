@@ -22,7 +22,7 @@ Installation
 ------------
 This archive comes packaged with the binaries, since they are platform-independent.
 In order to run it, you must have a Java VM installed. To recompile the program, 
-you must have  a Java compiler installed. Either the offical Oracle/Sun
+you must have  a Java compiler installed. Either the official Oracle/Sun
 version, or the GCC variant is recommended.  
 I recommend also using Eclipse (http://www.eclipse.org) for viewing, editing and
 compiling.
